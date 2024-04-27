@@ -16,8 +16,8 @@ type Convertable interface {
 
 func main() {
 	parser := parsers.NewParser()
-	category := "cinema-actors-actresses"
-	country := "peru"
+	category := "all"
+	country := "russia"
 	persons, err := parser.ParseTopInstagram(category, country)
 	if err != nil {
 		log.Fatalf(err.Error())
