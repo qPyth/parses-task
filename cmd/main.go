@@ -16,8 +16,8 @@ type Convertable interface {
 
 func main() {
 	parser := parsers.NewParser()
-	category := "all"
-	country := "russia"
+	category := "cinema-actors-actresses"
+	country := "peru"
 	persons, err := parser.ParseTopInstagram(category, country)
 	if err != nil {
 		log.Fatalf(err.Error())
@@ -32,6 +32,7 @@ func main() {
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
+
 }
 
 func ExportToCsv(data []types.Influencer, header []string, w io.Writer) error {

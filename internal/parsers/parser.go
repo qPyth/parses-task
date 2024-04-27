@@ -71,9 +71,27 @@ func (p Parser) parsePersonNode(n *html.Node) (t types.Influencer, err error) {
 				return t, fmt.Errorf("parsing rank error: %w", err)
 			}
 		case "row-cell contributor":
-			info := n.FirstChild.NextSibling.FirstChild
-			t.Info.IGUsername = getValueFromNode(info.FirstChild.FirstChild)
-			t.Info.Name = getValueFromNode(info.FirstChild.NextSibling)
+			//info := n.FirstChild.NextSibling.FirstChild
+			//t.Info.IGUsername = getValueFromNode(info.FirstChild.FirstChild)
+			//t.Info.Name = getValueFromNode(info.FirstChild.NextSibling)
+
+			head := n
+			attr := map[string]string{
+				"class": "contributor__title",
+			}
+			nameNode, _ := p.findElementsByAttr(head, attr)
+
+			head = n
+			attr = map[string]string{
+				"class": "contributor__name-content",
+			}
+			igNameNode, _ := p.findElementsByAttr(head, attr)
+			if igNameNode != nil {
+				t.Info.IGUsername = getValueFromNode(igNameNode[0])
+			}
+			if nameNode != nil {
+				t.Info.Name = getValueFromNode(nameNode[0])
+			}
 		case "row-cell category":
 			head := n
 			attr := map[string]string{
