@@ -23,6 +23,9 @@ func main() {
 		log.Fatalf(err.Error())
 	}
 	file, err := os.Create(fmt.Sprintf("top50-%s-%s.csv", category, country))
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
 	header := []string{"Rank", "Influencer", "Category", "Followers", "Country", "Eng. (Auth.)", "Eng. (Avg.)"}
 
 	err = ExportToCsv(persons, header, file)
